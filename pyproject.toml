@@ -14,7 +14,7 @@ django-environ = "^0.6.0"
 dj-database-url = "^0.5.0"
 Markdown = "^3.3.4"
 drf-spectacular = "^0.18.2"
-pycryptodome = "^3.10.1"
+cryptography = "^3.4.8"
 
 [tool.poetry.dev-dependencies]
 pytest = "6.2.5"

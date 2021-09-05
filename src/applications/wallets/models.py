@@ -14,7 +14,7 @@ class Wallet(models.Model):
 
     private_key = models.CharField(
         verbose_name=_('private_key'),
-        max_length=66,
+        max_length=184,
     )
     address = models.CharField(
         verbose_name=_('address'),
