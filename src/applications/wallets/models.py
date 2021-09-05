@@ -5,6 +5,8 @@ from django.conf import settings
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
+from applications.wallets.querysets import WalletQuerySet
+
 if TYPE_CHECKING:
     from applications.wallets.encryptors import WalletSecretEncryptorInterface
 
@@ -54,6 +56,8 @@ class Wallet(models.Model):
         choices=WalletCurrencyChoices.choices,
         default=DEFAULT_WALLET_CURRENCY,
     )
+
+    objects = models.Manager.from_queryset(WalletQuerySet)()
 
     def __str__(self):
         return f'{self.currency} - {self.address}'
