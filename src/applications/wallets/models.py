@@ -1,11 +1,12 @@
 import importlib
+import secrets
 from typing import TYPE_CHECKING, Type
 
 from django.conf import settings
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-from applications.wallets.querysets import WalletQuerySet
+from main.w3 import get_w3
 
 if TYPE_CHECKING:
     from applications.wallets.encryptors import WalletSecretEncryptorInterface
@@ -57,7 +58,19 @@ class Wallet(models.Model):
         default=DEFAULT_WALLET_CURRENCY,
     )
 
-    objects = models.Manager.from_queryset(WalletQuerySet)()
+    def save(self, *args, **kwargs) -> None:
+        """Override save() method."""
+        if not self.private_key:
+            self.private_key = '0x' + secrets.token_hex(32)
+        if not self.address:
+            self.address = self._create_new_address()
+        return super().save(*args, **kwargs)
+
+    def _create_new_address(self) -> str:
+        """Create new etherium address"""
+        w3 = get_w3()
+        account = w3.eth.account.from_key(self.private_key)
+        return account.address
 
     def __str__(self):
         return f'{self.currency} - {self.address}'
