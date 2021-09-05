@@ -687,7 +687,7 @@ python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 name = "pycryptodome"
 version = "3.10.1"
 description = "Cryptographic library for Python"
-category = "dev"
+category = "main"
 optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
 
@@ -1064,7 +1064,7 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "1.1"
 python-versions = "3.8.2"
-content-hash = "4293936e6ba7b76274e2ba815c61906835cf65626ba0c7535f477c12a97ad8f3"
+content-hash = "1992f5c848e6d0c54c7bd17026cc91aac1620108cd3ef6b8c50cefdfb33c4fc8"
 
 [metadata.files]
 aiohttp = [
