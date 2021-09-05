@@ -2,7 +2,21 @@ from cryptography.fernet import Fernet
 from django.conf import settings
 
 
-class WalletSecretFernetEncryptor(object):
+class WalletSecretEncryptorInterface(object):
+    """Type interface for the Wallet's private_key encryptors."""
+
+    @classmethod
+    def encrypt(cls, private_key: str) -> str:
+        """Encrypt private key."""
+        raise NotImplementedError
+
+    @classmethod
+    def decrypt(cls, value_from_db: str) -> str:
+        """Decrypt private_key."""
+        raise NotImplementedError
+
+
+class WalletSecretFernetEncryptor(WalletSecretEncryptorInterface):
     """Encrypt and decrypt Wallet.private_key with Fernet."""
 
     @classmethod

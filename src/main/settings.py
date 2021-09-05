@@ -134,3 +134,7 @@ SPECTACULAR_SETTINGS = {
 }
 
 FERNET_KEY = env('FERNET_KEY')
+
+WALLET_PRIVATE_KEY_ENCRYPTOR = (
+    'applications.wallets.encryptors.WalletSecretFernetEncryptor'
+)
