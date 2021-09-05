@@ -63,7 +63,7 @@ class Wallet(models.Model):
         if not self.private_key:
             self.private_key = '0x' + secrets.token_hex(32)
         if not self.address:
-            self.address = self._create_new_address(self.private_key)
+            self.address = self._create_new_address()
         return super().save(*args, **kwargs)
 
     def _create_new_address(self) -> str:
