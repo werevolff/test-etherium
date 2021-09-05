@@ -43,8 +43,8 @@ def decrypted_wallet_private_key() -> str:
 
 
 @pytest.fixture(autouse=True)
-def mock_wallet_query_set_create_new_address(mocker) -> Mock:
+def mock_wallet_create_new_address(mocker) -> Mock:
     return mocker.patch(
-        'applications.wallets.querysets.WalletQuerySet._create_new_address',
+        'applications.wallets.models.Wallet._create_new_address',
         return_value='0x' + secrets.token_hex(20),
     )

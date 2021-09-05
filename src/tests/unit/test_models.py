@@ -22,12 +22,12 @@ def test_wallet_secret_field_uses_encryptor(
 )
 def test_wallet_creation(
     wallet_factory,
-    mock_wallet_query_set_create_new_address,
+    mock_wallet_create_new_address,
     create_kwargs,
     expected_mock_called,
 ):
     wallet_factory(**create_kwargs)
     if expected_mock_called:
-        mock_wallet_query_set_create_new_address.assert_called_once()
+        mock_wallet_create_new_address.assert_called_once()
     else:
-        mock_wallet_query_set_create_new_address.assert_not_called()
+        mock_wallet_create_new_address.assert_not_called()
