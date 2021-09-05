@@ -24,7 +24,8 @@ env = environ.Env(
     SECRET_KEY=(str, 'mysecretkey'),
     DEBUG=(bool, True),
     ALLOWED_HOSTS=(list, ['127.0.0.1']),
-    FERNET_KEY=(str, '')
+    FERNET_KEY=(str, ''),
+    W3_PROVIDER_URL=(str, ''),
 )
 environ.Env.read_env(str(BASE_DIR.parent / '.env'))
 
@@ -138,3 +139,5 @@ FERNET_KEY = env('FERNET_KEY')
 WALLET_PRIVATE_KEY_ENCRYPTOR = (
     'applications.wallets.encryptors.WalletSecretFernetEncryptor'
 )
+
+W3_PROVIDER_URL = env('W3_PROVIDER_URL')
