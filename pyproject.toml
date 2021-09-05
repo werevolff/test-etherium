@@ -1,0 +1,33 @@
+[tool.poetry]
+name = "test-etherium"
+version = "0.1.0"
+description = ""
+authors = ["werevolff <ip.dolganov.nn@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "3.8.2"
+Django = "3.2.7"
+djangorestframework = "3.12.4"
+pathlib = "^1.0.1"
+psycopg2 = "^2.9.1"
+django-environ = "^0.6.0"
+dj-database-url = "^0.5.0"
+Markdown = "^3.3.4"
+drf-spectacular = "^0.18.2"
+
+[tool.poetry.dev-dependencies]
+pytest = "6.2.5"
+pytest-django = "^4.4.0"
+pytest-mock = "^3.6.1"
+flake8 = "^3.9.2"
+mypy = "^0.910"
+pytest-drf = "^1.1.2"
+factory-boy = "^3.2.0"
+web3 = "^5.23.1"
+flake8-django = "^1.1.2"
+flake8-isort = "^4.0.0"
+isort = "^5.9.3"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
