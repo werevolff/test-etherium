@@ -24,6 +24,7 @@ env = environ.Env(
     SECRET_KEY=(str, 'mysecretkey'),
     DEBUG=(bool, True),
     ALLOWED_HOSTS=(list, ['127.0.0.1']),
+    FERNET_KEY=(str, '')
 )
 environ.Env.read_env(str(BASE_DIR.parent / '.env'))
 
@@ -51,6 +52,8 @@ INSTALLED_APPS = [
 
     'rest_framework',
     'drf_spectacular',
+
+    'applications.wallets',
 ]
 
 MIDDLEWARE = [
@@ -129,3 +132,9 @@ SPECTACULAR_SETTINGS = {
     'DESCRIPTION': 'Test Etherium API',
     'VERSION': '1.0.0',
 }
+
+FERNET_KEY = env('FERNET_KEY')
+
+WALLET_PRIVATE_KEY_ENCRYPTOR = (
+    'applications.wallets.encryptors.WalletSecretFernetEncryptor'
+)
