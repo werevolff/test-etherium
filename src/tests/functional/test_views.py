@@ -188,6 +188,15 @@ class TestWalletViewSet(ViewSetTest, UsesPostMethod):
             assert expected_keys == returned_keys
 
 
+@pytest.fixture(autouse=True)
+def mock_send_transaction(mocker) -> Mock:
+    return mocker.patch(
+        ('applications.wallets.serializers.WalletTransferSerializer'
+         '._send_transaction'),
+        return_value='0x' + secrets.token_hex(20),
+    )
+
+
 @pytest.fixture
 def expected_keys() -> List[str]:
     return list(sorted(['address', 'currency']))
@@ -202,8 +211,16 @@ def mock_get_balance(mocker) -> Mock:
 
 
 @pytest.fixture(autouse=True)
-def mock_generate_gas_price_error(mocker) -> Mock:
+def mock_generate_gas_price(mocker) -> Mock:
     return mocker.patch(
         'web3.eth.Eth.generate_gas_price',
         return_value=4,
+    )
+
+
+@pytest.fixture(autouse=True)
+def mock_get_transaction_count(mocker) -> Mock:
+    return mocker.patch(
+        'web3.eth.Eth.get_transaction_count',
+        return_value=0,
     )
