@@ -7,7 +7,7 @@ from rest_framework import serializers
 from applications.wallets.models import Wallet
 
 
-def ethereum_address_validator(value:str):
+def ethereum_address_validator(value: str):
     """Check that value is correct Ethereum address."""
     if not re.match(r'^0x[a-fA-F0-9]{40}$', value):
         error_message = _('{0} is incorrect Ethereum address value.').format(

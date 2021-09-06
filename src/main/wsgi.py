@@ -1,5 +1,5 @@
 """
-WSGI config for test-etherium project.
+WSGI config for test-ethereum project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 

@@ -4,10 +4,8 @@ from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
 
 from applications.wallets.models import Wallet
-from applications.wallets.serializers import (
-    WalletSerializer,
-    WalletTransferSerializer,
-)
+from applications.wallets.serializers import (WalletSerializer,
+                                              WalletTransferSerializer)
 
 
 class WalletViewSet(CreateModelMixin, ListModelMixin, GenericViewSet):
