@@ -1,5 +1,5 @@
 """
-ASGI config for test-etherium project.
+ASGI config for test-ethereum project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 

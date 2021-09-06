@@ -39,7 +39,7 @@ class Wallet(models.Model):
     class WalletCurrencyChoices(models.TextChoices):
         """Choices for Wallet.currency field."""
 
-        ETHERIUM = 'eth', 'etherium'
+        ETHERIUM = 'eth', 'ethereum'
 
     DEFAULT_WALLET_CURRENCY = WalletCurrencyChoices.ETHERIUM
 
@@ -67,7 +67,7 @@ class Wallet(models.Model):
         return super().save(*args, **kwargs)
 
     def _create_new_address(self) -> str:
-        """Create new etherium address"""
+        """Create new ethereum address"""
         w3 = get_w3()
         account = w3.eth.account.from_key(self.private_key)
         return account.address
