@@ -107,7 +107,7 @@ class WalletTransferSerializer(serializers.Serializer):
             self.wallet.private_key,
         )
         hex_bytes = self.w3.eth.send_raw_transaction(signed_txn.rawTransaction)
-        return hex_bytes.hex
+        return hex_bytes.hex()
 
     def _validate_balance(self) -> None:
         """Validate balance."""
