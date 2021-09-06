@@ -141,3 +141,10 @@ WALLET_PRIVATE_KEY_ENCRYPTOR = (
 )
 
 W3_PROVIDER_URL = env('W3_PROVIDER_URL')
+
+ETHEREUM_TRANSACTIONS_DEFAULTS = {
+    'maxFeePerGas': 3000000000,
+    'maxPriorityFeePerGas': 2000000000,
+    'type': 2,
+    'chanId': 1,
+}

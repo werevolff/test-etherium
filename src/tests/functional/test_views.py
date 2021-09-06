@@ -2,6 +2,7 @@ import secrets
 from copy import deepcopy
 from http import HTTPStatus
 from typing import TYPE_CHECKING, Dict, List, Optional, TypedDict
+from unittest.mock import Mock
 
 import pytest
 from factory.fuzzy import FuzzyText
@@ -46,6 +47,28 @@ class TestWalletViewSet(ViewSetTest, UsesPostMethod):
             actual_keys = list(sorted(json.keys()))
             expected_keys = list(sorted(['hash', 'nonce']))
             assert actual_keys == expected_keys
+
+        class TestIncorrectBalance:
+            """Test incorrect balance value."""
+
+            def test_response_json(self, response, json):
+                assert response.status_code == HTTPStatus.BAD_REQUEST
+                assert '_from' in json
+
+            @pytest.fixture(
+                autouse=True,
+                params=(
+                    0,
+                    -3,
+                    4000000000,
+                    3000000000,
+                ),
+            )
+            def mock_get_balance_error(self, mocker, request) -> Mock:
+                return mocker.patch(
+                    'web3.eth.Eth.get_balance',
+                    return_value=request.param,
+                )
 
         class TestTransferBadRequest:
             """Test transfer fields validation."""
@@ -164,6 +187,40 @@ class TestWalletViewSet(ViewSetTest, UsesPostMethod):
             returned_keys = list(sorted(json.keys()))
             assert expected_keys == returned_keys
 
-    @pytest.fixture
-    def expected_keys(self) -> List[str]:
-        return list(sorted(['address', 'currency']))
+
+@pytest.fixture(autouse=True)
+def mock_send_transaction(mocker) -> Mock:
+    return mocker.patch(
+        ('applications.wallets.serializers.WalletTransferSerializer'
+         '._send_transaction'),
+        return_value='0x' + secrets.token_hex(20),
+    )
+
+
+@pytest.fixture
+def expected_keys() -> List[str]:
+    return list(sorted(['address', 'currency']))
+
+
+@pytest.fixture(autouse=True)
+def mock_get_balance(mocker) -> Mock:
+    return mocker.patch(
+        'web3.eth.Eth.get_balance',
+        return_value=5000000000,
+    )
+
+
+@pytest.fixture(autouse=True)
+def mock_generate_gas_price(mocker) -> Mock:
+    return mocker.patch(
+        'web3.eth.Eth.generate_gas_price',
+        return_value=4,
+    )
+
+
+@pytest.fixture(autouse=True)
+def mock_get_transaction_count(mocker) -> Mock:
+    return mocker.patch(
+        'web3.eth.Eth.get_transaction_count',
+        return_value=0,
+    )
