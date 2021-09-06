@@ -7,8 +7,8 @@ from tests.factories.wallets import WalletFactory
 
 
 @pytest.fixture
-def wallet(wallet_factory):
-    return wallet_factory()
+def wallet():
+    return WalletFactory(address='0x' + secrets.token_hex(20))
 
 
 @pytest.fixture

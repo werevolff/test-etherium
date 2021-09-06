@@ -39,7 +39,7 @@ class Wallet(models.Model):
     class WalletCurrencyChoices(models.TextChoices):
         """Choices for Wallet.currency field."""
 
-        ETHERIUM = 'eth', 'etherium'
+        ETHERIUM = 'eth', 'ethereum'
 
     DEFAULT_WALLET_CURRENCY = WalletCurrencyChoices.ETHERIUM
 

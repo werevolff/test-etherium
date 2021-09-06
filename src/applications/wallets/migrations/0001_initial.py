@@ -18,7 +18,7 @@ class Migration(migrations.Migration):
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('private_key', applications.wallets.models.WalletSecretField(max_length=250, verbose_name='private_key')),
                 ('address', models.CharField(max_length=42, verbose_name='address')),
-                ('currency', models.CharField(choices=[('eth', 'etherium')], default='eth', max_length=3, verbose_name='currency')),
+                ('currency', models.CharField(choices=[('eth', 'ethereum')], default='eth', max_length=3, verbose_name='currency')),
             ],
             options={
                 'verbose_name': 'wallet',
